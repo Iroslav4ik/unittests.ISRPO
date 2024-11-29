@@ -43,5 +43,6 @@ jobs:
         shell: pwsh
         if: runner.os == 'Windows'
 
-
+      - name: Run tests
+        run: python -m unittest test.triangle_unittests.py
 
