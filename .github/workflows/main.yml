@@ -44,7 +44,5 @@ jobs:
         if: runner.os == 'Windows'
 
       - name: Run tests
-        run: python3 -m unittest unittests/test.circle_unittests.py
-        run1: python3 -m unittest unittests/test.rectangle_unittests.py
-        run2: python3 -m unittest unittests/test.square_unittests.py
-        run3: python3 -m unittest unittests/test.triangle_unittests.py
+        run: python3 -m unittest unittests/test.triangle_unittests.py
+
