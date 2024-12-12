@@ -1,15 +1,11 @@
-def area(a, b):''' Функция для нахождения площади прямоугольника. '''
-    return a * b
+def area(length, width):
+    """Вычисление площади прямоугольника."""
+    if length < 0 or width < 0:
+        raise ValueError("Длина и ширина не могут быть отрицательными.")
+    return length * width
 
-def perimeter(a, b): ''' Функция для нахождения периметра прямоугольника.'''
-    return (a + b) * 2
-'''
-Пример:
-Входные данные: a = 5, b = 6
-
-1. def area(a,b)  
-Возвращаемое значение: 30
-
-2. def perimeter(a,b)  
-Возвращаемое значение: 22
-'''
+def perimeter(length, width):
+    """Вычисление периметра прямоугольника."""
+    if length < 0 or width < 0:
+        raise ValueError("Длина и ширина не могут быть отрицательными.")
+    return 2 * (length + width)
