@@ -26,7 +26,6 @@ jobs:
         run: |
           python --version
           pip --version
-
       - name: Install dependencies on Ubuntu or Windows
         run: |
           if [ -f requirements.txt ]; then
@@ -45,4 +44,3 @@ jobs:
 
       - name: Run tests
         run: python3 -m unittest test.triangle_unittests.py
-
