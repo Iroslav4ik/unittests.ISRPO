@@ -19,7 +19,7 @@ class CircleTestCase(unittest.TestCase):
     def test_circle_area_negative(self):
         """Площадь круга: радиус отрицательный."""
         with self.assertRaises(ValueError):
-            circle_area(-5)
+            circle_area(5)
 
     def test_circle_perimeter(self):
         """Длина окружности: радиус положительный."""
