@@ -3,9 +3,6 @@ from circle import circle_area, circle_perimeter
 import math
 
 
-class ValueError:
-    pass
-
 
 class CircleTestCase(unittest.TestCase):
     def test_circle_area(self):
@@ -19,7 +16,7 @@ class CircleTestCase(unittest.TestCase):
     def test_circle_area_negative(self):
         """Площадь круга: радиус отрицательный."""
         with self.assertRaises(ValueError):
-            circle_area(5)
+            circle_area(-5)
 
     def test_circle_perimeter(self):
         """Длина окружности: радиус положительный."""
