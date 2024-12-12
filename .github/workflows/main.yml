@@ -1,46 +1,51 @@
-name: CI\CD
+name: Run Unit Tests
+
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - main  # Можно заменить на любую другую ветку, например, master
 
 jobs:
-  test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+  test-ubuntu:
+    runs-on: ubuntu-latest  # Запуск на Ubuntu
+
     steps:
-      - name: Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v3  # Клонируем репозиторий
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'  # Укажите нужную версию Python
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Устанавливаем зависимости из requirements.txt
+
+      - name: Run unit tests
+        run: |
+          python -m unittest discover tests  # Запускаем все тесты из папки tests
+
+  test-windows:
+    runs-on: windows-latest  # Запуск на Windows
+
+    steps:
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.12
+          python-version: '3.10'
 
-      - name: Show Python version and pip
+      - name: Install dependencies
+        shell: pwsh  # Используем PowerShell для Windows
         run: |
-          python --version
-          pip --version
-      - name: Install dependencies on Ubuntu or Windows
-        run: |
-          if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          fi
-        shell: bash
-        if: runner.os == 'Linux'
+          python -m pip install --upgrade pip
+          if (Test-Path requirements.txt) { pip install -r requirements.txt }  # Устанавливаем зависимости из requirements.txt, если файл существует
 
-      - name: Install dependencies on Windows
+      - name: Run unit tests
+        shell: pwsh  # Используем PowerShell для Windows
         run: |
-          if (Test-Path requirements.txt) {
-            pip install -r requirements.txt
-          }
-        shell: pwsh
-        if: runner.os == 'Windows'
-
-      - name: Run tests
-        run: python3 -m unittest test.triangle_unittests.py
+          python -m unittest discover tests  # Запускаем тесты
